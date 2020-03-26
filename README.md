@@ -21,12 +21,16 @@ cinnamon-layout-system redmond7
 For customizers, the Cinnamon Main Menu icon has been registered with the Debian `update-alternatives` system. This means that the menu icon is set to the symlink `/usr/share/cinnamon-layout/menu-icon` which in turn is set by whatever is registered as the current target. You can register your own icon as an alternative file with this command:
 
 ```
-update-alternatives --install /usr/share/cinnamon-layout/menu-icon menu-icon \
-    /path/to/your/icon.png 100
+update-alternatives --install /usr/share/cinnamon-layout/menu-icon.svg menu-icon \
+    /path/to/your/icon.svg 200
 ```
 
-You then need to set `menu-icon` to your `update-alternative` selection:
+Since your alternative is installed with a priority of 200 (above), it should automatically be selected as the preferred alternative. Assuming cinnamon is still looking at `/usr/share/cinnamon-layout/menu-icon.svg` for the icon, you will then need to restart cinnamon to see your icon change.
+
+Re-running cinnamon-layout will reset back to `menu-icon.svg` if you have manually overridden it.
+
+You can also manually set `menu-icon` to your `update-alternative` selection, so that a new alternative with a higher priority number will not automatically override your choice:
 
 ```
-update-alternatives --set menu-icon /path/to/your/icon.png
+update-alternatives --set menu-icon /path/to/your/icon.svg
 ```
