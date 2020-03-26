@@ -27,7 +27,7 @@ update-alternatives --install /usr/share/cinnamon-layout/menu-icon.svg menu-icon
 
 Since your alternative is installed with a priority of 200 (above), it should automatically be selected as the preferred alternative. Assuming cinnamon is still looking at `/usr/share/cinnamon-layout/menu-icon.svg` for the icon, you will then need to restart cinnamon to see your icon change.
 
-Re-running cinnamon-layout will reset back to `menu-icon.svg` if you have manually overridden it.
+Re-running cinnamon-layout will reset back to `/usr/share/cinnamon-layout/menu-icon.svg` if you have manually overridden it.
 
 You can also manually set `menu-icon` to your `update-alternative` selection, so that a new alternative with a higher priority number will not automatically override your choice:
 
