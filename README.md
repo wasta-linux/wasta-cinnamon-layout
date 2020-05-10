@@ -27,7 +27,7 @@ app-menu-label = 'Menu'
 
 ***NOTE:*** some Cinnamon-Layouts will remove the app-menu-label, but you should still specify an `app-menu-label` in your `gschema.override` file for localization purposes for the layouts that will use a descriptive label for the Application Menu.
 
-***NOTE:*** To use a `gschema.override` file, place it in the `/usr/share/glib-2.0/schemas/` folder and then compile the schemas with the new overrides this way:
+***NOTE:*** To use a `gschema.override` file to customize your Main App Menu icon, label, your system GTK or icon theme, your backgroud, or other settings, place it in the `/usr/share/glib-2.0/schemas/` folder and then compile the schemas with the new overrides this way:
 ```
 glib-compile-schemas /usr/share/glib-2.0/schemas/
 ```
