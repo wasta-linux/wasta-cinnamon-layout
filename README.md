@@ -4,7 +4,7 @@ Cinnamon-Layout is a utility to switch between different Cinnamon desktop layout
 
 There are different branches of Cinnamon-Layout depending on the version of Cinnamon. Check the different branches for the source.
 
-The default layout does not depend on any additional Cinnamon applets or extensions. However, other layouts may depend on them. The additional applets or extensions that are used by different Cinnamon-Layouts are bundled as part of Cinnamon-Layout to ensure that they will be found.
+Applets or extensions that are used by different Cinnamon-Layouts that are not part of the core Cinnamon applets or extensions are bundled as part of Cinnamon-Layout to ensure that they will be found.
 
 Cinnamon-Layout can be run at the user level non-interactively from a terminal by supplying a layout such as:
 
@@ -12,25 +12,23 @@ Cinnamon-Layout can be run at the user level non-interactively from a terminal b
 cinnamon-layout redmond7
 ```
 
-Similarly, Cinnamon-Layout-System can be run at the system level (to change system defaults) non-interactively in this way:
+Similarly, Cinnamon-Layout-System can be run at the system level (to change system defaults for a new user, for example) non-interactively in this way:
 
 ```
 cinnamon-layout-system redmond7
 ```
 
-For customizers, the Cinnamon Main Menu icon has been registered with the Debian `update-alternatives` system. This means that the menu icon is set to the symlink `/usr/share/cinnamon-layout/menu-icon` which in turn is set by whatever is registered as the current target. You can register your own icon as an alternative file with this command:
-
+For customizers, Cinnamon allows customizing the Main App Menu icon and label. Here are examples that could be included in your own `gschema.override` file and added to `/usr/share/glib-2.0/schemas`:
 ```
-update-alternatives --install /usr/share/cinnamon-layout/menu-icon.svg menu-icon \
-    /path/to/your/icon.svg 200
+[org.cinnamon]
+app-menu-icon-name = 'wasta-linux-squircle'
+app-menu-label = 'Menu'
 ```
 
-Since your alternative is installed with a priority of 200 (above), it should automatically be selected as the preferred alternative. Assuming cinnamon is still looking at `/usr/share/cinnamon-layout/menu-icon.svg` for the icon, you will then need to restart cinnamon to see your icon change.
+***NOTE:*** some Cinnamon-Layouts will remove the app-menu-label, but you should still specify an `app-menu-label` in your `gschema.override` file for localization purposes for the layouts that will use a descriptive label for the Application Menu.
 
-Re-running cinnamon-layout will reset back to `/usr/share/cinnamon-layout/menu-icon.svg` if you have manually overridden it.
-
-You can also manually set `menu-icon` to your `update-alternative` selection, so that a new alternative with a higher priority number will not automatically override your choice:
-
+***NOTE:*** To use a `gschema.override` file, place it in the `/usr/share/glib-2.0/schemas/` folder and then compile the schemas with the new overrides this way:
 ```
-update-alternatives --set menu-icon /path/to/your/icon.svg
+glib-compile-schemas /usr/share/glib-2.0/schemas/
 ```
+After that, the updated schemas will now be system defaults, so if you reset your gsettings using something like `gsettings reset-recursively org.cinnamon`, or create a new user they will use these settings.
